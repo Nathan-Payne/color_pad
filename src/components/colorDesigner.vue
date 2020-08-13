@@ -1,6 +1,7 @@
 <template>
   <section>
     <h2>Color Designer</h2>
+    <h4>Click to store color</h4>
     <div id="designer-main">
       <div class="color-show-group">
         <div class="color-show" :style="currentColor" @click="saveColor"></div>
@@ -58,11 +59,10 @@ export default {
 #designer-main {
   display: flex;
   align-items: center;
-  margin: 0rem 1rem;
+  justify-content: space-between;
 }
 
 .color-show-group {
-  flex: 4;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,17 +70,17 @@ export default {
 }
 
 .color-show {
-  width: 9rem;
-  height: 9rem;
+  width: 7rem;
+  height: 7rem;
   border: 2px solid black;
   border-radius: 1rem;
+  cursor: pointer;
 }
 
 .slider-group {
-  flex: 8;
-  display: flex;
-  justify-content: space-around;
-  max-width: 50%;
-  margin-right: 3rem;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 0.7rem;
+  margin-left: 2rem;
 }
 </style>

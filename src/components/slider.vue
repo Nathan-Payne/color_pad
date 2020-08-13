@@ -40,15 +40,18 @@ export default {
 <style scoped>
 .slider {
   position: relative;
-  height: 12rem;
-  width: 20%;
+  height: 11rem;
+  width: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 input[type="range"] {
   -webkit-appearance: none;
-  position: absolute;
+  /* position: absolute;
   bottom: 50%;
-  left: 20%;
+  left: 20%; */
   cursor: pointer;
   transform: rotate(270deg);
   background-color: transparent;
@@ -77,8 +80,8 @@ input[type="range"]::-webkit-slider-thumb {
 
 label {
   position: absolute;
-  width: 100%;
-  bottom: 5%;
-  left: 4rem;
+  width: 50%;
+  bottom: 0%;
+  left: 2rem;
 }
 </style>

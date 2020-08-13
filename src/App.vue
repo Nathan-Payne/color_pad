@@ -31,7 +31,7 @@ const app = {
   created() {
     // eslint-disable-next-line prettier/prettier
     eventBus.$on("saveColor", (rgb) => {
-      const idNum = this.savedColors.length + 1;
+      const idNum = Math.floor(Math.random() * 1000 + 1);
       this.savedColors.push({
         id: idNum,
         colorCss: `background-color: rgb(${rgb.red}, ${rgb.green}, ${rgb.blue})`,
@@ -63,14 +63,14 @@ body {
 }
 
 .container {
-  width: 80vw;
-  margin: 3rem auto;
-  padding: 1.5rem;
+  width: 70vw;
+  margin: 2.1rem auto;
+  padding: 1rem 3rem;
   /* border: 2px solid #ddd; */
 }
 
 header {
-  padding-bottom: 2rem;
+  padding-bottom: 1.5rem;
 }
 
 section {
