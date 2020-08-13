@@ -40,7 +40,7 @@ body {
 
 .container {
   width: 80vw;
-  margin: 4rem auto;
+  margin: 3rem auto;
   padding: 1.5rem;
   /* border: 2px solid #ddd; */
 }
@@ -52,6 +52,7 @@ header {
 section {
   width: 100%;
   height: 40%;
+  padding-bottom: 2rem;
 }
 
 h2 {

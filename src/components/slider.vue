@@ -1,8 +1,16 @@
 <template>
   <div class="slider">
-    <input type="range" name="Red" min="0" max="255" v-model="value" />
-    <label for="Red">
-      R: <span>{{ value }}</span>
+    <input
+      type="range"
+      name="sliderInput"
+      min="0"
+      max="255"
+      v-model="value"
+      :style="`background-color: ${sliderColor}`"
+      v-on:change="sendColor()"
+    />
+    <label for="sliderInput">
+      {{ letterColor }}: <span>{{ value }}</span>
     </label>
   </div>
 </template>
@@ -15,6 +23,17 @@ export default {
       value: 0,
     };
   },
+  props: ["sliderColor"],
+  computed: {
+    letterColor: function() {
+      return this.sliderColor[0].toUpperCase();
+    },
+  },
+  methods: {
+    sendColor() {
+      this.$emit("colorVal", this.value);
+    },
+  },
 };
 </script>
 
@@ -22,7 +41,7 @@ export default {
 .slider {
   position: relative;
   height: 12rem;
-  width: 30%;
+  width: 20%;
 }
 
 input[type="range"] {
@@ -33,13 +52,14 @@ input[type="range"] {
   cursor: pointer;
   transform: rotate(270deg);
   background-color: transparent;
+  border-radius: 20px;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
   -webkit-appearance: none;
   cursor: pointer;
   height: 0.5rem;
-  background-color: red;
+  background-color: transparent;
   border-radius: 20px;
   border: 0.2px solid #010101;
 }
@@ -57,7 +77,8 @@ input[type="range"]::-webkit-slider-thumb {
 
 label {
   position: absolute;
+  width: 100%;
   bottom: 5%;
-  left: 46%;
+  left: 4rem;
 }
 </style>
