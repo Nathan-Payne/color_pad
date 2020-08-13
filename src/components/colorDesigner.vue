@@ -3,7 +3,7 @@
     <h2>Color Designer</h2>
     <div id="designer-main">
       <div class="color-show-group">
-        <div class="color-show" :style="currentColor"></div>
+        <div class="color-show" :style="currentColor" @click="saveColor"></div>
       </div>
       <div class="slider-group">
         <color-slider
@@ -25,6 +25,8 @@
 
 <script>
 import Slider from "./slider.vue";
+import { eventBus } from "../main.js";
+
 export default {
   name: "colorDesigner",
   components: {
@@ -41,9 +43,14 @@ export default {
       let r = this.rgb.red;
       let g = this.rgb.green;
       let b = this.rgb.blue;
-      return `background-color: rgb(${r}, ${g}, ${b})`
-    }
-  }
+      return `background-color: rgb(${r}, ${g}, ${b})`;
+    },
+  },
+  methods: {
+    saveColor() {
+      eventBus.$emit("saveColor", this.rgb);
+    },
+  },
 };
 </script>
 
@@ -65,7 +72,8 @@ export default {
 .color-show {
   width: 9rem;
   height: 9rem;
-  border: 1px solid black;
+  border: 2px solid black;
+  border-radius: 1rem;
 }
 
 .slider-group {

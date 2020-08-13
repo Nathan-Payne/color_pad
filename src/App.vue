@@ -5,19 +5,43 @@
       <h4>Use the sliders to choose a color</h4>
     </header>
     <color-designer></color-designer>
-    <palette-display></palette-display>
+    <palette-display :savedColors="savedColors"></palette-display>
   </div>
 </template>
 
 <script>
 import colorDesigner from "./components/colorDesigner.vue";
 import paletteDisplay from "./components/paletteDisplay";
+import { eventBus } from "./main.js";
 
 const app = {
   name: "App",
+  data: function() {
+    return {
+      savedColors: [
+        { id: 1, colorCss: "background-color: rgb(100, 200, 150)" },
+        { id: 2, colorCss: "background-color: rgb(355, 0, 150)" },
+      ],
+    };
+  },
   components: {
     "color-designer": colorDesigner,
     "palette-display": paletteDisplay,
+  },
+  created() {
+    // eslint-disable-next-line prettier/prettier
+    eventBus.$on("saveColor", (rgb) => {
+      const idNum = this.savedColors.length + 1;
+      this.savedColors.push({
+        id: idNum,
+        colorCss: `background-color: rgb(${rgb.red}, ${rgb.green}, ${rgb.blue})`,
+      });
+    });
+    eventBus.$on("deleteColor", (colorId) => {
+      this.savedColors = this.savedColors.filter(
+        (colorObject) => colorObject.id !== colorId
+      );
+    });
   },
 };
 export default app;
@@ -52,7 +76,7 @@ header {
 section {
   width: 100%;
   height: 40%;
-  padding-bottom: 2rem;
+  padding-bottom: 0.5rem;
 }
 
 h2 {
