@@ -1,7 +1,15 @@
 <template>
   <div class="container neu-1">
     <header>
-      <h1>Color Pad</h1>
+      <h1>
+        <span
+          class="outline-title"
+          v-for="(letter, i) in title"
+          :key="i"
+          :style="{ color: generatedArray[i] }"
+          >{{ letter }}</span
+        >
+      </h1>
       <h4>Use the sliders to choose a color</h4>
     </header>
     <color-designer></color-designer>
@@ -22,6 +30,8 @@ const app = {
         { id: 1, colorCss: "background-color: rgb(255, 255, 255)" },
         { id: 2, colorCss: "background-color: rgb(255, 0, 150)" },
       ],
+      title: "Color Pad",
+      generatedArray: [],
     };
   },
   components: {
@@ -42,6 +52,26 @@ const app = {
         (colorObject) => colorObject.id !== colorId
       );
     });
+    //colorful title code
+    let clearBlink = setInterval(() => {
+      for (let i = 0; i < this.title.length; i++) {
+        this.generatedArray.push(this.generateColor());
+        setTimeout(() => {
+          this.generatedArray = [];
+        }, 290);
+      }
+    }, 300);
+    setTimeout(() => {
+      clearInterval(clearBlink);
+    }, 1200);
+  },
+  methods: {
+    generateColor() {
+      let randNum = () => {
+        return Math.floor(100 + Math.random() * 155);
+      };
+      return `rgb(${randNum()}, ${randNum()}, ${randNum()})`;
+    },
   },
 };
 export default app;
@@ -92,5 +122,10 @@ h4 {
   border-radius: 20px;
   background: #222222;
   box-shadow: 29px 29px 59px #1c1c1c, -29px -29px 59px #282828;
+}
+.outline-title {
+  font-size: 2.4rem;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 </style>

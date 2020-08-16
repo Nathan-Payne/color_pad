@@ -33,6 +33,13 @@ export default {
     sendColor() {
       this.$emit("colorVal", this.value);
     },
+    randColor() {
+      return Math.floor(Math.random() * 255);
+    },
+  },
+  created: function() {
+    this.value = this.randColor();
+    this.sendColor();
   },
 };
 </script>
