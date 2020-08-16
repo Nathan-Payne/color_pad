@@ -1,7 +1,7 @@
 <template>
   <div class="container neu-1">
     <header>
-      <h1>
+      <h1 v-on:click="colorfulTitleAnimation">
         <span
           class="outline-title"
           v-for="(letter, i) in title"
@@ -52,18 +52,7 @@ const app = {
         (colorObject) => colorObject.id !== colorId
       );
     });
-    //colorful title code
-    let clearBlink = setInterval(() => {
-      for (let i = 0; i < this.title.length; i++) {
-        this.generatedArray.push(this.generateColor());
-        setTimeout(() => {
-          this.generatedArray = [];
-        }, 290);
-      }
-    }, 300);
-    setTimeout(() => {
-      clearInterval(clearBlink);
-    }, 1200);
+    this.colorfulTitleAnimation();
   },
   methods: {
     generateColor() {
@@ -71,6 +60,19 @@ const app = {
         return Math.floor(100 + Math.random() * 155);
       };
       return `rgb(${randNum()}, ${randNum()}, ${randNum()})`;
+    },
+    colorfulTitleAnimation() {
+      let clearBlink = setInterval(() => {
+        for (let i = 0; i < this.title.length; i++) {
+          this.generatedArray.push(this.generateColor());
+          setTimeout(() => {
+            this.generatedArray = [];
+          }, 290);
+        }
+      }, 300);
+      setTimeout(() => {
+        clearInterval(clearBlink);
+      }, 1200);
     },
   },
 };
