@@ -59,7 +59,8 @@ export default {
 #designer-main {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .color-show-group {
@@ -75,6 +76,11 @@ export default {
   border: 2px solid black;
   border-radius: 1rem;
   cursor: pointer;
+  transition: transform 250ms ease-in-out;
+}
+.color-show:hover {
+  transform: scale(1.2, 1.2);
+  transition: transform 250ms ease-in-out;
 }
 
 .slider-group {
@@ -82,5 +88,12 @@ export default {
   grid-auto-flow: column;
   gap: 0.7rem;
   margin-left: 2rem;
+}
+
+@media (max-width: 768px) {
+  .slider-group {
+    gap: 0;
+    margin-left: 0rem;
+  }
 }
 </style>

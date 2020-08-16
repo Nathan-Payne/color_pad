@@ -19,8 +19,8 @@ const app = {
   data: function() {
     return {
       savedColors: [
-        { id: 1, colorCss: "background-color: rgb(100, 200, 150)" },
-        { id: 2, colorCss: "background-color: rgb(355, 0, 150)" },
+        { id: 1, colorCss: "background-color: rgb(255, 255, 255)" },
+        { id: 2, colorCss: "background-color: rgb(255, 0, 150)" },
       ],
     };
   },

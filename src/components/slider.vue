@@ -7,7 +7,7 @@
       max="255"
       v-model="value"
       :style="`background-color: ${sliderColor}`"
-      v-on:change="sendColor()"
+      v-on:input="sendColor()"
     />
     <label for="sliderInput">
       {{ letterColor }}: <span>{{ value }}</span>
@@ -83,5 +83,11 @@ label {
   width: 50%;
   bottom: 0%;
   left: 2rem;
+}
+
+@media (max-width: 768px) {
+  .slider {
+    width: 4.5rem;
+  }
 }
 </style>
