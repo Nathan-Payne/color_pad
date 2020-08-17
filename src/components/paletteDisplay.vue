@@ -11,12 +11,15 @@
           :style="color.colorCss"
           @mouseover="showDelete = true"
           @mouseleave="showDelete = false"
-          @click="copyText"
+          @click="copyText(`allow`)"
         >
           <span class="rgbFormat">{{ color.colorCss.split(":")[1] }}</span>
           <button
             v-if="showDelete"
-            @click="deleteColor(color.id)"
+            @click="
+              deleteColor(color.id);
+              copyText(``);
+            "
             class="btn-delete"
           >
             x
@@ -35,7 +38,7 @@ export default {
   props: ["savedColors"],
   data: function() {
     return {
-      showDelete: false,
+      showDelete: [],
     };
   },
   methods: {
@@ -51,17 +54,19 @@ export default {
       el.style.width = width;
       el.style.height = height;
     },
-    copyText(el) {
+    copyText(el, allow) {
       //copy to clipboard, can only do inside of textareas/inputs
-      let textArea = document.createElement("textarea");
-      textArea.value = el.target.querySelector("span").innerHTML;
-      textArea.setAttribute("readonly", "");
-      textArea.style.position = "absolute";
-      textArea.style.left = "-9999px";
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textArea);
+      if (allow) {
+        let textArea = document.createElement("textarea");
+        textArea.value = el.target.querySelector("span").innerHTML;
+        textArea.setAttribute("readonly", "");
+        textArea.style.position = "absolute";
+        textArea.style.left = "-9999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+      }
     },
   },
 };
