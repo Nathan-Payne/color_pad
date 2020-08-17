@@ -7,8 +7,9 @@
           v-for="(letter, i) in title"
           :key="i"
           :style="{ color: generatedArray[i] }"
-          >{{ letter }}</span
         >
+          {{ letter }}
+        </span>
       </h1>
       <h4>Use the sliders to choose a color</h4>
     </header>
