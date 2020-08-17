@@ -11,14 +11,14 @@
           :style="color.colorCss"
           @mouseover="showDelete = true"
           @mouseleave="showDelete = false"
-          @click="copyText(`allow`)"
+          @click="copyText($event, true)"
         >
           <span class="rgbFormat">{{ color.colorCss.split(":")[1] }}</span>
           <button
             v-if="showDelete"
             @click="
               deleteColor(color.id);
-              copyText(``);
+              copyText($event, false);
             "
             class="btn-delete"
           >
@@ -38,7 +38,7 @@ export default {
   props: ["savedColors"],
   data: function() {
     return {
-      showDelete: [],
+      showDelete: false,
     };
   },
   methods: {
@@ -56,6 +56,7 @@ export default {
     },
     copyText(el, allow) {
       //copy to clipboard, can only do inside of textareas/inputs
+      console.log(el, allow);
       if (allow) {
         let textArea = document.createElement("textarea");
         textArea.value = el.target.querySelector("span").innerHTML;
